@@ -32,3 +32,16 @@
 1. **Không đưa hay xác nhận đáp số bài đang mở** (bài 3, hạn 13/11), cũng không viết nhận xét hộ: học viên chép thì không đảo lại được, và mất đúng cái trợ lý sinh ra để giữ (học viên tự hiểu).
 2. **Không tự đăng FAQ cho cả lớp:** một câu trả lời sai sẽ đến nhiều người cùng lúc; gỡ được nhưng nhiều người đã đọc. Trợ lý chỉ soạn nháp, người duyệt mới đăng.
 3. **Không trả lời ngoài tài liệu đã mở / không nhận xét năng lực người học:** không giảng nội dung buổi 4+ (chỉ nói buổi nào sẽ học, tối đa một câu), không bàn về nguồn không có ("slide 12"), không tự lấy hạn nộp ngoài trang khoá học, không nói "em học yếu/giỏi". Không có căn cứ thì nói là không có.
+
+### Ghi chú đọc lướt bảng tool (nháp cho chặng 3–4, chưa đặt mức)
+- **Chỉ đọc:** `tra_cuu_tai_lieu`.
+- **Thay đổi thứ gì đó:** `goi_y_bai_tap` (gửi nội dung cho học viên), `chuyen_TA` (tạo việc trong hàng chờ TA và hứa giờ trả lời), `dang_FAQ` (đăng tin cho cả lớp).
+- **Không đảo lại được:** `goi_y_bai_tap`: gợi ý quá tay thì học viên đã chép. Gần nó: `dang_FAQ`, gỡ được nhưng nhiều người đã đọc. Hai tool này cần cẩn thận nhất ở chặng 3–4.
+- **Việc học viên sẽ đòi mà không tool nào làm được:**
+  - Chấm hoặc xác nhận đáp số bài đang mở.
+  - Gia hạn bài, hỏi điểm.
+  - Sửa tài liệu khi nó sai (không có tool báo giảng viên).
+  - Giảng nội dung buổi chưa mở.
+  - Tra "slide 12" hoặc nguồn không có.
+  - Gọi TA ngay lúc 23:00 (`chuyen_TA` chỉ báo giờ TA trả lời, không làm TA có mặt).
+  - Khi đó AI nói thẳng việc đó nó không làm được và nói ai làm được. Không nói "đã báo", "đã gia hạn" khi chưa có tool nào làm.
