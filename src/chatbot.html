@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Trợ lý học bài · T2 Giáo dục · AI thật</title>
+<link rel="stylesheet" href="chatbot.css">
+</head>
+<body>
+<header>
+ <h1>Trợ lý học bài (AI thật) — học viên hỏi lúc tối muộn, bài 3 sắp hết hạn</h1>
+ <div class="sub">Lời gọi AI thật qua server của nhóm. Dữ liệu khoá học dựng. Bên phải: nhật ký tool, mức tự chủ, màn hình TA — để xem ai duyệt, ai hoàn tác.</div>
+ <div class="toggle">
+  <span>Giờ giả lập:</span>
+  <button data-clock="2026-11-13T15:00">15:00 13/11</button>
+  <button data-clock="2026-11-13T22:10">22:10 13/11</button>
+  <button data-clock="2026-11-14T08:00">08:00 14/11</button>
+  <span id="modelbadge" style="margin-left:10px"></span>
+  <button class="reset" id="reset">Làm lại từ đầu</button>
+  <span style="margin-left:10px"><label><input type="checkbox" id="ann" checked> Hiện số chú thích HAX/PAIR</label></span>
+ </div>
+</header>
+<main>
+ <section class="phone">
+  <div class="bar"><span>Khoá Phân tích dữ liệu · Buổi 3</span><span id="clock">--:--</span></div>
+  <div class="trip" id="deadline"><span class="n">7</span>Đang tải hạn nộp…</div>
+  <div class="fixed"><span class="n">4</span><b>Việc mình không làm được:</b> đưa/kiểm đáp số bài đang mở · gia hạn</div>
+  <div class="chat" id="chat"></div>
+  <div class="sugg" id="sugg"></div>
+  <form class="composer" id="form"><input id="msg" placeholder="Hỏi bài…" autocomplete="off" maxlength="1500"><button class="btn pri" id="send" type="submit">Gửi</button></form>
+ </section>
+ <aside>
+  <div class="panel"><h2>Nhật ký tool (mỗi lượt)</h2><div class="log" id="log"><span class="hint">Chưa có lượt nào.</span></div></div>
+  <div class="panel"><h2>Màn hình TA · hàng chờ <span class="n">7</span></h2>
+   <div class="hint">Cập nhật mỗi 2 giây. Việc "gắn cờ" là của người, AI không tự gắn.</div>
+   <div class="row2"><div><b style="font-size:13.5px">Hàng chờ</b><div id="queue"></div></div><div><b style="font-size:13.5px">Nháp FAQ (cả lớp chưa thấy)</b><div id="faq"></div></div></div>
+   <div class="hint" id="flagsline" style="margin-top:8px"></div>
+  </div>
+  <div class="panel"><h2>Mức tự chủ của các tool</h2>
+   <table><tr><th>Tool</th><th>Mức</th><th>Ai duyệt / vì sao</th></tr><tbody id="tools"></tbody></table></div>
+ </aside>
+</main>
+<div class="foot">LAB5 · AI20K K5 · Ngày 5 · Nhóm Omega · chatbot chạy thật (Gemini). Khoá API chỉ nằm ở server.</div>
+<div class="modal" id="modal"><div class="card"><b id="mtitle"></b><div id="mflag"></div><div class="verb" id="mtext"></div><div class="btns"><button class="btn" id="mclose">Đóng</button></div></div></div>
+<script src="chatbot.js"></script>
+</body></html>
