@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Prototype T2 Giáo dục · Trợ lý học bài tối muộn · Omega</title>
+<style>
+:root{--ink:#1d2321;--mut:#6b6f6c;--line:#dcd8cf;--bg:#f6f4ef;--card:#fff;--g:#2e6a4f;--gb:#e5f1ea;--a:#8a6516;--ab:#fbefd3;--r:#a33b2b;--rb:#f8e3df;--b:#28507a;--bb:#e3ecf6;--o:#c2410c;--ob:#fde8d8}
+*{box-sizing:border-box}body{margin:0;font-family:"Be Vietnam Pro","Noto Sans","Segoe UI",Arial,sans-serif;color:var(--ink);background:var(--bg);font-size:15px;line-height:1.45}
+header{padding:16px 28px 10px;border-bottom:1px solid var(--line);background:#fff}
+h1{font-size:20px;margin:0 0 4px}.sub{color:var(--mut);font-size:13.5px}
+.toggle{display:flex;gap:8px;margin:10px 0 2px;flex-wrap:wrap;align-items:center}
+.toggle>span{font-size:13.5px;color:var(--mut);margin-right:4px}
+.toggle button{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:6px 14px;font:inherit;font-size:14px;cursor:pointer}
+.toggle button.on{border-color:var(--ink);background:var(--ink);color:#fff}
+.toggle.off button{opacity:.45}.toggle.off button.on{opacity:.7}
+main{display:grid;grid-template-columns:420px minmax(0,1fr);gap:24px;padding:20px 28px 28px;max-width:1400px;align-items:start}
+.phone{background:#fff;border:1px solid var(--line);border-radius:28px;padding:14px;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+.bar{display:flex;justify-content:space-between;font-size:12px;color:var(--mut);padding:0 6px 8px;border-bottom:1px solid var(--line)}
+.dl{margin:10px 4px 6px;padding:9px 12px;border-radius:12px;background:var(--rb);font-size:13.5px}.dl b{color:var(--r)}
+.g1{margin:6px 4px;padding:7px 10px;border-radius:10px;background:#f1efe9;font-size:12.5px;color:#444}
+.chat{display:flex;flex-direction:column;gap:10px;padding:6px 4px;min-height:420px}
+.me{align-self:flex-end;background:var(--b);color:#fff;padding:9px 12px;border-radius:14px 14px 2px 14px;max-width:85%}
+.ai{align-self:flex-start;background:#f1efe9;padding:10px 12px;border-radius:14px 14px 14px 2px;max-width:96%}
+.ai .who{font-size:12px;color:var(--mut);margin-bottom:3px}
+.chip{display:inline-block;font-size:12.5px;padding:1px 9px;border-radius:999px;background:var(--bb);color:var(--b);font-weight:600;border:1px solid #bcd0e6;cursor:pointer;margin:0 2px}
+.chip.flag{background:var(--ab);color:var(--a);border-color:#ecd59e}
+.ev{font-size:12.5px;color:var(--mut);border-left:3px solid var(--line);padding-left:8px;margin-top:6px}
+.box{border-radius:12px;padding:10px 12px;margin-top:8px;font-size:14px}
+.box.hold{background:var(--gb);border:1px solid #bcd9c8}.box.warn{background:var(--ab);border:1px solid #ecd59e}.box.done{background:var(--bb);border:1px solid #bcd0e6}.box.red{background:var(--rb);border:1px solid #e9bdb4}
+.box.org{background:var(--ob);border:1.5px solid #f0a679}.box.sure{background:var(--gb);border:1px solid #bcd9c8}
+.box h4{margin:0 0 3px;font-size:12.5px;text-transform:uppercase;letter-spacing:.03em}
+blockquote{margin:4px 0;padding:4px 8px;border-left:3px solid var(--o);background:#fff;font-style:italic;font-size:13.5px}
+.note{font-size:12px;color:var(--mut);margin-top:8px;padding:6px 8px;background:#f6f4ef;border-radius:8px}
+.btns{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.btn{border:0;border-radius:10px;padding:8px 12px;font:inherit;font-size:14px;cursor:pointer;background:#e8e5de}
+.btn.pri{background:var(--g);color:#fff}.btn.out{background:#fff;border:1.5px solid var(--ink)}.btn.danger{background:var(--r);color:#fff}.btn.sm{padding:5px 10px;font-size:13px}.btn[disabled]{opacity:.4;cursor:not-allowed}
+.sugg{align-self:flex-end;border:1.5px dashed var(--b);color:var(--b);background:#fff;border-radius:14px;padding:7px 11px;font:inherit;font-size:13.5px;cursor:pointer;max-width:90%;text-align:left}
+textarea{width:100%;font:inherit;font-size:13.5px;border:1.5px solid var(--line);border-radius:8px;padding:6px;margin-top:6px}
+.timer{font-variant-numeric:tabular-nums;font-weight:700}
+.n{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:var(--o);color:#fff;font-size:11.5px;font-weight:700;margin-right:4px;vertical-align:1px;flex:none}
+.hide-n .n{display:none}
+aside{display:flex;flex-direction:column;gap:16px;min-width:0}
+.panel{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px 18px}
+.panel h2{font-size:16px;margin:0 0 8px}
+table{border-collapse:collapse;width:100%;font-size:13.5px}td,th{border-bottom:1px solid var(--line);padding:6px 6px;text-align:left;vertical-align:top}th{color:var(--mut);font-weight:600}
+.pill{display:inline-block;padding:1px 8px;border-radius:999px;font-size:12.5px;font-weight:600;margin:1px 0}
+.p-auto{background:var(--gb);color:var(--g)}.p-ask{background:var(--ab);color:var(--a)}.p-no{background:var(--rb);color:var(--r)}
+.changed td{background:#fffaf0}
+.ann li{margin-bottom:5px}.ann{padding-left:0;list-style:none;margin:0}
+.promise{font-size:15px;border-left:4px solid var(--ink);padding:6px 10px;background:#faf9f5}
+.qi{border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-top:8px;font-size:13.5px;background:#fcfbf8}
+.qi .tag{display:inline-block;font-size:12px;font-weight:700;border-radius:999px;padding:1px 8px;margin-right:4px}
+.t-urg{background:var(--rb);color:var(--r)}.t-sus{background:var(--ab);color:var(--a)}.t-faq{background:#eceae4;color:#444}.t-ok{background:var(--gb);color:var(--g)}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.35);display:none;align-items:center;justify-content:center;z-index:9}
+.modal.show{display:flex}.modal .card{background:#fff;border-radius:16px;padding:18px 20px;max-width:420px;width:92%}
+.foot{font-size:12px;color:var(--mut);padding:0 28px 20px}
+label{font-size:14px}
+</style></head>
+<body>
+<header>
+ <h1>Prototype T2 Giáo dục · Trợ lý học bài tối muộn (khoá "Nhập môn phân tích dữ liệu", buổi 3)</h1>
+ <div class="sub">Cùng một model, chỉ đổi <b>mức tự chủ</b> của tool <code>goi_y_bai_tap</code>. Dữ liệu dựng (hôm nay 13/11/2026, 22:10); không có lời gọi AI thật.</div>
+ <div class="toggle" id="tc"><span>Ca:</span>
+  <button data-c="10">Ca #10 · 22:10 giải hộ bài 3</button>
+  <button data-c="3">Ca #3 · tài liệu §3.3 sai</button>
+  <span style="margin-left:14px"><label><input type="checkbox" id="ann" checked> Hiện số chú thích HAX/PAIR</label></span>
+ </div>
+ <div class="toggle" id="tl"><span>Mức tự chủ của <code>goi_y_bai_tap</code>:</span>
+  <button data-l="1">① Cần TA duyệt mọi gợi ý</button>
+  <button data-l="2">② Nhóm chọn: tự làm một bước, cấm đáp số</button>
+  <button data-l="3">③ Tự làm không giới hạn</button>
+  <span id="lnote" style="font-size:12.5px;color:var(--mut)"></span>
+ </div>
+</header>
+<main>
+ <section class="phone" id="phone">
+  <div class="bar"><span>Trợ lý học bài · Nhập môn phân tích dữ liệu</span><span>22:10 · 13/11</span></div>
+  <div class="dl" id="dl"></div>
+  <div class="g1" id="g1"></div>
+  <div class="chat" id="chat"></div>
+ </section>
+ <aside>
+  <div class="panel"><h2>Lời hứa với học viên ở mức này</h2><div class="promise" id="promise"></div></div>
+  <div class="panel"><h2>Mức tự chủ của các tool (dòng tô vàng là dòng đang đổi / đang dùng)</h2>
+   <table><tr><th>Tool</th><th>Mức</th><th>Vì sao (cái giá khi sai)</th></tr><tbody id="tools"></tbody></table></div>
+  <div class="panel"><h2><span class="n">7</span>Màn hình TA · hàng chờ (bonus)</h2><div id="queue"></div></div>
+  <div class="panel"><h2>Chú thích: nguyên tắc nào nằm ở đâu (chỉ số đang hiện trên màn hình)</h2><ul class="ann" id="ann-list"></ul></div>
+ </aside>
+</main>
+<div class="foot">LAB5 · Track 02 · Omega · một file HTML, dữ liệu dựng, không gọi AI thật, không gửi dữ liệu đi đâu. URL: ?case=10|3&amp;level=1|2|3&amp;ta=sent&amp;flag=1&amp;later=1</div>
+<div class="modal" id="m"><div class="card" id="mc"></div></div>
+<script>
+const $=s=>document.querySelector(s);
+const q=new URLSearchParams(location.search);
+const S={c:q.get('case')=='3'?3:10,L:[1,2,3].includes(+q.get('level'))?+q.get('level'):2,sent:q.get('ta')=='sent',step:false,confirm:false,corrected:false,rep:'',repOpen:false,copied:false,flagged:q.get('flag')=='1',later:q.get('later')=='1',faq:'pending',exc:null,flagOff:false};
+if(S.later)S.flagged=true;
+let rem=6540;
+const SEC={
+ '3.1':['§3.1 Trung bình cộng','Tổng các giá trị chia cho số giá trị. Trung bình bị kéo mạnh bởi giá trị ngoại lai.'],
+ '3.2':['§3.2 Trung vị','Giá trị đứng giữa khi sắp xếp dữ liệu tăng dần. Nếu số giá trị là chẵn, trung vị là trung bình cộng của hai giá trị đứng giữa. Trung vị ít bị ảnh hưởng bởi giá trị ngoại lai, nên thường dùng cho dữ liệu lệch như thu nhập hay giá nhà.'],
+ '3.3':['§3.3 Phương sai và độ lệch chuẩn','Phương sai đo mức độ phân tán của dữ liệu quanh trung bình. Độ lệch chuẩn là căn bậc hai của phương sai, có cùng đơn vị với dữ liệu. <mark>Vì là căn bậc hai, độ lệch chuẩn luôn nhỏ hơn phương sai.</mark>']};
+const QS10='giải hộ em bài 3 đi 22h rồi, TA hết giờ rồi, mai là hết hạn';
+const QS3='sao độ lệch chuẩn luôn nhỏ hơn phương sai vậy ạ, em đọc 3.3 thấy ghi vậy mà ko hiểu';
+const QL='độ lệch chuẩn là gì ạ, em đọc 3.3 chưa hiểu';
+const WRONG='Vì là căn bậc hai, độ lệch chuẩn luôn nhỏ hơn phương sai.';
+const COUNTER='phương sai 0,25 → độ lệch chuẩn 0,5';
+const hhmm=s=>{const m=Math.ceil(Math.max(s,0)/60);return Math.floor(m/60)+':'+String(m%60).padStart(2,'0')};
+const num=k=>`<span class="n">${k}</span>`;
+const chip=(s,flagged)=>`<span class="chip ${flagged?'flag':''}" data-act="exc" data-s="${s}">§${s}${flagged?' · đang xem xét':''}</span>`;
+const me=x=>`<div class="me">${x}</div>`;
+const ai=x=>`<div class="ai"><div class="who">Trợ lý học bài (AI)</div>${x}</div>`;
+const g1Text='Việc mình không làm được: đưa/kiểm đáp số bài đang mở · gia hạn';
+const TAHOUR='08:00 14/11';
+
+function confirmCard(){
+ const ca3=S.c==3;
+ const q=ca3?QS3:QS10, sec=ca3?'§3.3':'§3.2', tag=ca3?'nghi tài liệu sai':'gấp, trước hạn';
+ return `<b>Gửi cho TA những nội dung sau?</b>
+ <table style="margin:8px 0;font-size:13.5px"><tr><td>Câu của bạn</td><td>"${q}"</td></tr><tr><td>Bài</td><td>Bài 3 (đang mở, hạn 23:59 13/11)</td></tr><tr><td>Mã mục đính kèm</td><td>${sec}</td></tr><tr><td>Nhãn</td><td><b>${tag}</b></td></tr>${S.rep?`<tr><td>Bạn ghi thêm</td><td>"${S.rep}"</td></tr>`:''}<tr><td>TA trả lời lúc</td><td><b style="color:var(--r)">${TAHOUR} — sau hạn 23:59 hôm nay</b></td></tr></table>
+ <div style="font-size:13px;color:var(--mut)">Không bấm "Gửi" thì không có gì được gửi, và mình sẽ không nói "đã chuyển". Mình không có quyền gia hạn.</div>
+ <div class="btns"><button class="btn pri" data-act="send">Gửi cho TA</button><button class="btn" data-act="cancel">Thôi</button></div>`;
+}
+function excCard(){
+ const e=SEC[S.exc];const fl=S.exc=='3.3'&&S.flagged;
+ return `<b>Nguyên văn · Tài liệu buổi 3 "Thống kê mô tả"</b>
+ <p style="margin:8px 0"><b>${e[0]}.</b> ${e[1]}</p>${fl?'<div class="box warn">Mục này đang được TA/giảng viên xem xét (có cờ). Đừng dùng câu bôi vàng khi làm bài.</div>':''}
+ <div class="btns"><button class="btn" data-act="cancel">Đóng</button></div>`;
+}
+
+function chat10(){
+ let h=me(QS10);
+ const L=S.L;
+ if(L==1){
+  h+=ai(`Bài 3 đang mở. Mình đã soạn một gợi ý bước đầu và <b>gửi cho TA duyệt</b> trước khi hiện cho bạn.
+  <div class="box warn"><b>Đang chờ TA duyệt</b> · TA trả lời sớm nhất <b>${TAHOUR}</b> — sau hạn 23:59 hôm nay.</div>
+  <div class="box red" style="font-size:13px"><b>Rủi ro của mức này:</b> chờ người ở đây chính là lỗi. 22:10 hôm nay không có TA, gợi ý đến lúc 08:00 thì bài đã quá hạn. Học viên chờ vô ích và không biết điều đó nếu không đọc giờ.</div>`);
+ } else if(L==3){
+  h+=ai(`Mình giải luôn cho bạn nhé. Theo ${chip('3.1')} và ${chip('3.2')}: sắp xếp 9, 10, 10, 11, 12, 12, 13, 45. Trung bình = 122 / 8 = <b>15,25</b>. Có 8 giá trị (chẵn) nên trung vị là trung bình của hai giá trị giữa: (11 + 12) / 2 = <b>11,5</b>. Phần (b): trung vị mô tả "lương điển hình" tốt hơn vì 45 là ngoại lai. Bạn chép vào bài là kịp hạn!
+  <div class="box red" style="font-size:13px"><b>Rủi ro của mức này:</b> học viên chép, không đảo lại được và không còn tự làm. Ca #7 ("em ra 15,25 và 11,5 đúng không") được xác nhận "đúng" chỉ vì may đáp số đúng, không vì thiết kế; lần sau đáp số sai cũng bị "sửa hộ" như vậy.</div>`);
+ } else {
+  h+=ai(`Bài 3 đang mở nên mình không đưa hay kiểm đáp số hộ bạn được. ${num(3)}<b>Bạn thử bước đầu này: đếm xem có mấy giá trị, rồi đọc ${num(2)}${chip('3.2')} xem khi số giá trị là chẵn thì trung vị tính thế nào.</b> Lưu ý: hạn bài 3 là hôm nay 23:59, còn TA làm 08:00–22:00 nên TA sớm nhất trả lời lúc 08:00 ngày mai, tức sau hạn. Mình không có quyền gia hạn; nếu cần, bạn nhắn thẳng giảng viên. Bạn có muốn mình chuyển câu hỏi cho TA để TA xem lúc 08:00 không?
+  ${S.sent?'':`<div class="btns"><button class="btn pri" data-act="ask">${num(5)}Chuyển TA · trả lời lúc ${TAHOUR}</button>${S.step?'':'<button class="btn out" data-act="step">Bước tiếp theo</button>'}</div>`}`);
+  if(S.step)h+=me('Bước tiếp theo')+ai(`Bước 2 (chỉ một bước): sắp xếp 8 giá trị theo thứ tự tăng dần, rồi chỉ ra <b>hai giá trị đứng giữa</b>. Mình dừng ở đây; phép tính tiếp theo là của bạn, và mình sẽ không nói kết quả đúng hay sai.`);
+  if(S.sent)h+=ai(`<div class="box done">Đã chuyển cho TA: câu của bạn, bài 3, ${chip('3.2')}, nhãn "gấp, trước hạn". TA trả lời sớm nhất <b>${TAHOUR}</b>, <b>sau hạn</b>. Mình chưa có cách nào xin gia hạn; bạn vẫn nên nhắn thẳng giảng viên nếu cần.</div>`);
+  else if(S.step)h=h;
+ }
+ return h;
+}
+function chat3(){
+ const fl=S.flagged&&!S.flagOff;
+ let h;
+ if(S.later){
+  h=me(QL)+ai(`<div class="box warn"><b>Cảnh báo trước khi giảng:</b> ${chip('3.3',true)} đang được TA/giảng viên xem xét (cờ gắn 13/11). Mình sẽ tách phần chắc chắn và phần đang xem xét.</div>
+  <div class="box sure"><h4>Phần chắc chắn</h4>Độ lệch chuẩn là căn bậc hai của phương sai và có cùng đơn vị với dữ liệu (${chip('3.3',true)}).</div>
+  <div class="box org"><h4>${num(1)}Câu cần xem lại</h4><blockquote>${WRONG}</blockquote>Câu này đang được xem xét: không dùng nó khi làm bài. Nếu phương sai là 0,25 thì độ lệch chuẩn là 0,5, lớn hơn.</div>
+  <div style="margin-top:6px">${num(2)}Bấm chip để đọc nguyên văn mục.</div>`);
+  return h;
+ }
+ h=me(QS3);
+ h+=ai(`<div class="box sure"><h4>Phần chắc chắn</h4>độ lệch chuẩn là căn bậc hai của phương sai và có cùng đơn vị với dữ liệu ${num(2)}${chip('3.3',fl)}.</div>
+ <div class="box org"><h4>${num(1)}Câu cần xem lại</h4><blockquote>${WRONG}</blockquote>Câu này trong cùng mục có vẻ không đúng mọi trường hợp: nếu phương sai là 0,25 thì độ lệch chuẩn là 0,5, lớn hơn. Mình không chắc tài liệu muốn nói gì ở câu đó, nên bạn chưa dùng nó khi làm bài. ${num(2)}${chip('3.3',fl)}</div>
+ <div style="margin-top:8px">Bạn nên hỏi giảng viên để xác nhận; mình có thể chuyển câu hỏi cho TA kèm mã §3.3 nếu bạn muốn.</div>
+ <div class="btns">${S.sent?'':`<button class="btn pri" data-act="ask">${num(5)}Chuyển TA kèm §3.3</button>`}<button class="btn out" data-act="copy">${S.copied?'Đã sao chép':'Sao chép tin gửi giảng viên'}</button><button class="btn" data-act="rep">${num(6)}Báo sai chỗ nào?</button></div>
+ ${S.repOpen?`<textarea id="rt" rows="2" placeholder="Ghi thêm chỗ bạn thấy sai, sẽ nối vào tin gửi TA">${S.rep}</textarea><div class="btns"><button class="btn sm pri" data-act="repok">Thêm vào tin gửi TA</button></div>`:''}
+ ${S.rep&&!S.repOpen?`<div class="note">Đã thêm vào tin gửi TA: "${S.rep}"</div>`:''}
+ <div class="note">Đã tự gửi báo "nghi tài liệu sai" (ẩn danh) cho TA — <code>bao_tai_lieu_nghi_sai</code>, tự làm, TA bỏ cờ được.</div>`);
+ if(!S.corrected)h+=`<button class="sugg" data-act="corr">em thử phương sai 0,25 thì căn ra 0,5 thật, vậy tài liệu sai à?</button>`;
+ else h+=me('em thử phương sai 0,25 thì căn ra 0,5 thật, vậy tài liệu sai à?')+ai(`Bạn tính đúng: căn bậc hai của 0,25 là 0,5, lớn hơn 0,25. Mình bỏ ý trước đó rằng câu "luôn nhỏ hơn" có thể đúng, và cảm ơn bạn đã chỉ ra. Mình vẫn chưa kết luận tài liệu sai hẳn: <b>có vẻ sai, cần giảng viên xác nhận</b>. Bạn thấy còn chỗ nào lạ nữa thì bấm "Báo sai chỗ nào?" để mình ghi thêm vào tin gửi TA.`);
+ if(S.sent)h+=ai(`<div class="box done">Đã chuyển cho TA kèm ${chip('3.3',fl)} và nhãn "nghi tài liệu sai". TA trả lời sớm nhất <b>${TAHOUR}</b>. Mình không nói được giảng viên đã biết; bạn nên gửi thẳng giảng viên bản đã sao chép.</div>`);
+ return h;
+}
+
+function queue(){
+ let h='',n=0;
+ const item=(tag,cls,body,btns='')=>{n++;return `<div class="qi"><span class="tag ${cls}">${tag}</span>${body}${btns?`<div class="btns">${btns}</div>`:''}</div>`};
+ if(S.c==10){
+  if(S.L==1)h+=item('chờ duyệt gợi ý','t-sus',`<b>Gợi ý bước đầu bài 3</b> chờ TA duyệt · tạo 22:10 13/11 · TA đọc sớm nhất ${TAHOUR} (sau hạn).<br><small>Câu học viên: "${QS10}"</small>`);
+  if(S.sent)h+=item('gấp, trước hạn','t-urg',`<b>Bài 3 · §3.2</b> · học viên bấm gửi lúc 22:1x 13/11.<br>Câu học viên: "${QS10}"<br><small>Hạn 23:59 13/11 · TA đọc sớm nhất ${TAHOUR}. Xếp đầu hàng chờ.</small>`);
+  if(S.L==3&&!S.sent)h+='<div class="note">Mức ③: không có gì để TA duyệt; đáp số đã đến học viên. TA không còn thấy trường hợp này.</div>';
+  if(!h)h='<div class="note">Hàng chờ trống: học viên chưa bấm [Gửi cho TA], nên chưa có gì được gửi. Bấm thử trên phone.</div>';
+  return h;
+ }
+ const fl=S.flagged&&!S.flagOff;
+ h+=item('nghi tài liệu sai','t-sus',`<b>§3.3</b> · tự động, ẩn danh (<code>bao_tai_lieu_nghi_sai</code>) · 22:1x 13/11<br>Câu nghi sai nguyên văn: <i>"${WRONG}"</i><br>Phản chứng: <b>${COUNTER}</b>.${fl?'<br><span class="tag t-ok">đã gắn cờ "đang xem xét"</span>':''}`,
+  fl?'<button class="btn sm" data-act="unflag">Bỏ cờ</button>':'<button class="btn sm pri" data-act="flag">Gắn cờ "đang xem xét"</button><button class="btn sm" data-act="unflag" disabled>Bỏ cờ</button>');
+ if(S.sent)h+=item('nghi tài liệu sai · học viên chuyển','t-sus',`<b>§3.3</b> · học viên bấm gửi 22:1x 13/11. Câu: "${QS3}"${S.rep?`<br>Học viên ghi thêm: "${S.rep}"`:''}<br><small>TA đọc sớm nhất ${TAHOUR}.</small>`);
+ const faqBody=`<b>Nháp FAQ</b> (<code>soan_nhap_FAQ</code>, chưa ai trong lớp thấy) · cites ${chip('3.3',fl)}${fl?' <span class="tag t-sus">§ đang có cờ</span>':''}<br>Hỏi: độ lệch chuẩn có luôn nhỏ hơn phương sai không?<br>Trả lời (nháp): không luôn: phương sai &lt; 1 thì độ lệch chuẩn lớn hơn (0,25 → 0,5), bằng 1 thì bằng nhau (§3.3 đang nghi sai).`;
+ if(S.faq=='pending')h+=item('chờ TA duyệt','t-faq',faqBody,'<button class="btn sm pri" data-act="faqok">Duyệt đăng</button><button class="btn sm" data-act="faqno">Bỏ</button>');
+ else h+=item(S.faq=='ok'?'đã đăng (dang_FAQ, TA duyệt)':'đã bỏ nháp','t-ok','Nháp FAQ về độ lệch chuẩn.');
+ return h;
+}
+
+function render(){
+ const c=S.c,L=S.L;
+ document.querySelectorAll('#tc button').forEach(b=>b.classList.toggle('on',+b.dataset.c==c));
+ document.querySelectorAll('#tl button').forEach(b=>b.classList.toggle('on',+b.dataset.l==L));
+ $('#tl').classList.toggle('off',c==3);
+ $('#lnote').textContent=c==3?'(chỉ có nghĩa với ca #10; ca #3 không gọi goi_y_bai_tap)':'';
+ $('#dl').innerHTML=`${num(7)}<b>Bài 3 hạn 23:59 hôm nay · còn <span class="timer cd">${hhmm(rem)}</span> · TA đã hết giờ (22:00)</b>`;
+ const hideG1=c==10&&L==3;
+ $('#g1').style.display=hideG1?'none':'block';
+ $('#g1').innerHTML=`${num(4)}${g1Text}`;
+ let h=c==10?chat10():chat3();
+ if(c==3)h=`<div class="btns" style="margin:0"><button class="btn sm ${S.later?'out':''}" data-act="later" ${S.flagged?'':'disabled title="TA chưa gắn cờ §3.3"'}>${S.later?'Quay về học viên đầu tiên':'Xem như học viên sau (TA đã gắn cờ §3.3)'}</button></div>`+h;
+ $('#chat').innerHTML=h;
+ const P10={1:'"Mọi gợi ý cho bài đang mở đều qua TA; mình sẽ trả lời bạn khi TA duyệt." Nghe an toàn, nhưng lúc 22:10 lời hứa này nghĩa là "sớm nhất 08:00 mai" — sau hạn. Học viên chờ vô ích.',
+  2:'"Mình dẫn bạn tự làm từng bước; đáp số là của bạn, và mình không nói nó đúng hay sai." Thay cho "AI giải giúp bạn lúc không ai trả lời". Với <code>chuyen_TA</code>: "TA trả lời lúc 08:00 14/11", không phải "TA sẽ giúp kịp hạn". <b>Mức nhóm chọn.</b>',
+  3:'"Cần là có: mình giải giúp bạn lúc nào cũng được." Nhanh nhất, nhưng học viên chép được đáp số, không đảo lại được, và mất điều trợ lý sinh ra để giữ là học viên tự hiểu.'};
+ const P3='"Mình tách phần chắc chắn khỏi phần mình nghi, và cho bạn đọc nguyên văn mục. Mình tự báo TA (ẩn danh) khi nghi tài liệu sai; việc chuyển câu hỏi của bạn chỉ khi bạn bấm. Mình không nói giảng viên đã biết, và không tự sửa tài liệu."';
+ $('#promise').innerHTML=c==3?P3:P10[L];
+ const lvTool={1:['Cần TA duyệt (mọi gợi ý)','p-ask','TA duyệt trước khi học viên thấy. Cost: lúc 22:10 chờ đến 08:00 14/11, sau hạn — chờ chính là lỗi (#10).'],
+  2:['Tách theo trạng thái bài','p-auto','(a) bài 2 hết hạn, có đáp án: tự làm, giải đầy đủ (#6). (b) bài 3 đang mở: tự làm, một bước, không số đáp án, lọc chặn 15,25 / 11,5. (c) đưa/xác nhận đáp số: <span class="pill p-no">cấm — không có nút</span>'],
+  3:['Tự làm không giới hạn','p-auto','Học viên chép đáp số, không đảo lại được; #7 "đúng vì may" (#10, #7).']};
+ const lt=lvTool[L];
+ const T=[['tra_cuu_tai_lieu','Tự làm','p-auto','Chỉ đọc; sai § thì học viên tự thấy chip. Chờ người = không có câu trả lời lúc 22h. Có cờ "đang xem xét" thì phải hiện.',0],
+  ['goi_y_bai_tap',lt[0],lt[1],lt[2],c==10],
+  ['chuyen_TA','Cần duyệt (học viên bấm)','p-ask','Học viên thấy nội dung, § và giờ TA thật trước khi gửi; không bấm thì không gửi và không nói "đã chuyển" (#9, #10).',0],
+  ['bao_tai_lieu_nghi_sai (mới)','Tự làm','p-auto','Ẩn danh, chỉ mã §, câu nghi sai, phản chứng. Sai chỉ tốn vài phút TA; TA bỏ cờ được. Chờ học viên bấm thì câu sai ở lại cho học viên sau (#3).',c==3],
+  ['soan_nhap_FAQ (tách)','Tự làm','p-auto','Chỉ soạn nháp, lớp không thấy.',c==3],
+  ['dang_FAQ (tách)','Cần TA/giảng viên duyệt','p-ask','Một câu sai đến cả lớp (#8). Đăng đáp số bài đang mở: <span class="pill p-no">cấm</span>.',0]];
+ $('#tools').innerHTML=T.map(r=>`<tr class="${r[4]?'changed':''}"><td><code>${r[0]}</code></td><td><span class="pill ${r[2]}">${r[1]}</span></td><td>${r[3]}</td></tr>`).join('');
+ $('#queue').innerHTML=queue();
+ // annotation list: chỉ số đang hiện
+ const hn=document.body.classList.contains('hide-n');document.body.classList.remove('hide-n');
+ const vis=new Set();document.querySelectorAll('#phone .n,#queue .n,#dl .n').forEach(e=>{if(e.offsetParent)vis.add(e.textContent)});vis.add('7');
+ if(hn)document.body.classList.add('hide-n');
+ const A=[['1','HAX G2 · làm rõ AI làm tốt tới đâu','Khối "Phần chắc chắn" tách khỏi khối cam "Câu cần xem lại" quoting câu sai của §3.3. Mức: tự làm.'],
+ ['2','HAX G11 + PAIR Explainability / Trust','Chip § bấm mở nguyên văn đoạn tài liệu (§3.2, §3.3) để học viên tự kiểm căn cứ. Mức: <code>tra_cuu_tai_lieu</code> tự làm.'],
+ ['3','HAX G10 · thu hẹp khi nghi ngờ','Chỉ một bước đầu (đếm, đọc §3.2), không đáp số. Mức ②: <code>goi_y_bai_tap</code> một bước.'],
+ ['4','HAX G1 · nói rõ việc AI không làm được','Dòng cố định "Việc mình không làm được: đưa/kiểm đáp số bài đang mở · gia hạn".'],
+ ['5','PAIR Errors + Graceful Failure','Nút chuyển TA có giờ thật (08:00 14/11, sau hạn) + thẻ xác nhận cho thấy đúng nội dung gửi; "Sao chép tin gửi giảng viên" là đường lui. Mức: <code>chuyen_TA</code> học viên bấm.'],
+ ['6','HAX G15 · tiếp nhận phản hồi','"Báo sai chỗ nào?" cho học viên ghi thêm vào tin gửi TA (đường Correction sau #3).'],
+ ['7','Thanh hạn nộp + màn hình TA (tự đề xuất)','Thanh "còn 1:49 · TA đã hết giờ (22:00)" (luật thêm 5); hàng chờ TA hiện nhãn "gấp, trước hạn", § và giờ TA đọc.']];
+ let al=A.filter(a=>vis.has(a[0])).map(a=>`<li><span class="n">${a[0]}</span><b>${a[1]}</b> — ${a[2]}</li>`).join('');
+ if(c==10&&L==1)al+='<li style="color:#6b6f6c">Ở mức ① không có ② ③ ⑤: gợi ý nằm trong hàng chờ TA, học viên không có gì để bấm hay đọc.</li>';
+ if(c==10&&L==3)al+='<li style="color:#6b6f6c">Ở mức ③ mất ③ ④ ⑤: AI đưa đáp số, không giới hạn, không nói việc mình không làm được.</li>';
+ $('#ann-list').innerHTML=al;
+}
+function hideM(){$('#m').classList.remove('show')}
+function showM(h){$('#mc').innerHTML=h;$('#m').classList.add('show')}
+function copyText(){
+ const t=`Gửi thầy/cô, em đọc §3.3 (Tài liệu buổi 3 "Thống kê mô tả") thấy câu "${WRONG}" Em thử phương sai 0,25 thì độ lệch chuẩn là 0,5, lớn hơn. Nhờ thầy/cô xem lại giúp em.${S.rep?' Em ghi thêm: '+S.rep:''}`;
+ try{navigator.clipboard.writeText(t).catch(()=>{})}catch(e){}
+ try{const a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();document.execCommand('copy');a.remove()}catch(e){}
+}
+document.body.addEventListener('click',e=>{
+ const el=e.target.closest('[data-act]');if(!el||el.disabled)return;const a=el.dataset.act;
+ if(a=='exc'){S.exc=el.dataset.s;showM(excCard());return}
+ if(a=='cancel'){hideM();return}
+ if(a=='ask'){showM(confirmCard());return}
+ if(a=='send'){S.sent=true;hideM()}
+ else if(a=='step')S.step=true;
+ else if(a=='copy'){copyText();S.copied=true}
+ else if(a=='rep'){S.repOpen=!S.repOpen}
+ else if(a=='repok'){S.rep=($('#rt').value||'').trim();S.repOpen=false}
+ else if(a=='corr')S.corrected=true;
+ else if(a=='later')S.later=!S.later;
+ else if(a=='flag'){S.flagged=true;S.flagOff=false}
+ else if(a=='unflag'){S.flagged=false;S.later=false}
+ else if(a=='faqok')S.faq='ok';
+ else if(a=='faqno')S.faq='no';
+ render();
+});
+document.querySelectorAll('#tc button').forEach(b=>b.onclick=()=>{Object.assign(S,{c:+b.dataset.c,sent:false,step:false,corrected:false,rep:'',repOpen:false,copied:false,flagged:false,later:false,faq:'pending'});render()});
+document.querySelectorAll('#tl button').forEach(b=>b.onclick=()=>{if(S.c==3)return;Object.assign(S,{L:+b.dataset.l,sent:false,step:false});render()});
+$('#ann').onchange=e=>document.body.classList.toggle('hide-n',!e.target.checked);
+$('#m').onclick=e=>{if(e.target.id=='m')hideM()};
+setInterval(()=>{rem--;document.querySelectorAll('.cd').forEach(x=>x.textContent=hhmm(rem))},1000);
+render();
+</script></body></html>
