@@ -2,7 +2,7 @@
 
 ## Thành viên nhóm
 
-**Lớp:** H202 · **Bàn / zone:** ____ · **Track:** 02
+**Lớp:** L3B · **Bàn / zone:** ____ · **Track:** 02
 
 | Họ và Tên | Mã Học Viên | Việc đã làm |
 |---|---|---|
@@ -19,8 +19,8 @@
 
 **3 việc tính năng KHÔNG làm:**
 
-1. **Không đưa, không xác nhận đáp số bài tập đang mở**  Chỉ gợi ý bước đầu, vì đáp số đã đưa thì học viên chép được ngay (`goi_y_bai_tap` không đảo lại được) và mất đúng thứ lát cắt muốn bảo vệ là "hiểu đúng bài, không chép đáp án".
-2. **Không giảng nội dung của buổi chưa học**  Chỉ nói tên buổi theo trang khoá học và tối đa một câu giới thiệu, vì chưa có tài liệu nào để trích mục, nên AI chỉ còn cách bịa và học viên không có cách tự kiểm.
+1. **Không đưa, không xác nhận đáp số bài tập đang mở** (hiện là Bài tập 3, hạn 13/11/2026 23:59).  Chỉ gợi ý bước đầu, vì đáp số đã đưa thì học viên chép được ngay (`goi_y_bai_tap` không đảo lại được) và mất đúng thứ lát cắt muốn bảo vệ là "hiểu đúng bài, không chép đáp án".
+2. **Không giảng nội dung của buổi chưa học** (buổi 4–10, ví dụ p-value ở buổi 7). Chỉ nói tên buổi theo trang khoá học và tối đa một câu giới thiệu, vì chưa có tài liệu nào để trích mục, nên AI chỉ còn cách bịa và học viên không có cách tự kiểm.
 3. **Không nhận xét năng lực của học viên** ("bạn hơi yếu phần này") và không viết nhận xét hộ bài. Việc này nằm ngoài thẩm quyền của trợ lý, và một câu nhận xét sai hoặc quá tay vào lúc 22h, khi không có ai ở cạnh, có thể làm học viên bỏ cuộc mà không ai biết.
 
 ## §2. Kịch bản rủi ro  (chặng 2)
