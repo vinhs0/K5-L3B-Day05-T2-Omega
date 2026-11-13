@@ -17,7 +17,11 @@
 |---|---|---|---|---|
 | Trợ lý học bài của trang khoá học | học viên | hỏi bài lúc tối muộn, khi không còn ai để hỏi | giảng kèm trích tài liệu, hỏi lại cho rõ, gợi ý từng bước, hay nói thẳng "tài liệu không có, hỏi giảng viên" | học viên hiểu đúng bài mình đang học, không chép đáp án, không học sai mà không biết |
 
-- 3 việc tính năng KHÔNG làm, mỗi việc một câu vì sao.
+**3 việc tính năng KHÔNG làm:**
+
+1. **Không đưa, không xác nhận đáp số bài tập đang mở**  Chỉ gợi ý bước đầu, vì đáp số đã đưa thì học viên chép được ngay (`goi_y_bai_tap` không đảo lại được) và mất đúng thứ lát cắt muốn bảo vệ là "hiểu đúng bài, không chép đáp án".
+2. **Không giảng nội dung của buổi chưa học**  Chỉ nói tên buổi theo trang khoá học và tối đa một câu giới thiệu, vì chưa có tài liệu nào để trích mục, nên AI chỉ còn cách bịa và học viên không có cách tự kiểm.
+3. **Không nhận xét năng lực của học viên** ("bạn hơi yếu phần này") và không viết nhận xét hộ bài. Việc này nằm ngoài thẩm quyền của trợ lý, và một câu nhận xét sai hoặc quá tay vào lúc 22h, khi không có ai ở cạnh, có thể làm học viên bỏ cuộc mà không ai biết.
 
 ## §2. Kịch bản rủi ro  (chặng 2)
 Bốn lớp: ① AI bịa / nguồn sự thật · ② tin nhắn mơ hồ, thiếu · ③ đòi việc ngoài thẩm quyền · ④ sai là mất ngay (điểm, hạn, niềm tin). Mốc thời gian dùng cho cả bảng: hôm nay 13/11/2026, bài 3 hạn 23:59 hôm nay, giờ TA 08:00–22:00. Số liệu bài 3 (9, 10, 10, 11, 12, 12, 13, 45): trung bình 15,25, trung vị 11,5.
