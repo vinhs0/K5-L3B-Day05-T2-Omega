@@ -2,13 +2,12 @@
 
 ## Thành viên nhóm
 
-**Lớp:** L3B · **Bàn / zone:** ____ · **Track:** 02
+**Lớp:** L3B · **Bàn / zone:** H · **Track:** 02
 
 | Họ và Tên | Mã Học Viên | Việc đã làm |
 |---|---|---|
-|  Trần Thành Vinh |  2A202603845 |  |
-| Đỗ Thị Thu Hằng | 2A202603840 |  |
-|  |  |  |
+| Trần Thành Vinh | 2A202603845 | Phần lớn §2 (kịch bản rủi ro); §3 ca #3; §4 bảng tool và tách tool; dựng prototype (§5); §6; mở đầu demo |
+| Đỗ Thị Thu Hằng | 2A202603840 | §1; góp §2; chặng 3–5: §3 ca #10, §4 mức `goi_y_bai_tap` và thử mức, §5 màn hình ca #10 và bảng HAX/PAIR; demo ca #10 |
 
 ## §1. Lát cắt & phạm vi
 **Lát cắt** Trong **trợ lý học bài của trang khoá học (kiểu ChatGPT Study mode)**, khi **học viên** đang hỏi bài lúc tối muộn, khi không còn ai để hỏi, **AI giảng kèm trích tài liệu, hỏi lại cho rõ, gợi ý từng bước, hay nói thẳng "tài liệu không có, hỏi giảng viên"**, để học viên hiểu đúng bài mình đang học, không chép đáp án, không học sai mà không biết.
@@ -24,7 +23,7 @@
 3. **Không nhận xét năng lực của học viên** ("bạn hơi yếu phần này") và không viết nhận xét hộ bài. Việc này nằm ngoài thẩm quyền của trợ lý, và một câu nhận xét sai hoặc quá tay vào lúc 22h, khi không có ai ở cạnh, có thể làm học viên bỏ cuộc mà không ai biết.
 
 ## §2. Kịch bản rủi ro  (chặng 2)
-Bốn lớp: ① AI bịa / nguồn sự thật · ② tin nhắn mơ hồ, thiếu · ③ đòi việc ngoài thẩm quyền · ④ sai là mất ngay (điểm, hạn, niềm tin). Mốc thời gian dùng cho cả bảng: hôm nay 13/11/2026, bài 3 hạn 23:59 hôm nay, giờ TA 08:00–22:00. Số liệu bài 3 (9, 10, 10, 11, 12, 12, 13, 45): trung bình 15,25, trung vị 11,5.
+Bốn lớp: ① AI bịa / nguồn sự thật · ② tin nhắn mơ hồ, thiếu · ③ đòi việc ngoài thẩm quyền · ④ sai là mất ngay (điểm, hạn, niềm tin). Mốc thời gian dùng cho cả bảng: hôm nay 13/11/2026, bài 3 hạn 23:59 hôm nay, giờ TA 08:00–22:00. **Giả định:** Dữ liệu B chỉ ghi khung giờ TA 08:00–22:00; 14/11/2026 là thứ Bảy nhưng nhóm giả định TA trực hằng ngày, nên mọi chỗ ghi "08:00 14/11" trong bài hiểu là *sớm nhất*. Số liệu bài 3 (9, 10, 10, 11, 12, 12, 13, 45): trung bình 15,25, trung vị 11,5.
 
 | # | Tin học viên nhắn | Lớp | AI có thể sai thế nào (trỏ về tool / dữ liệu) | Sản phẩm tốt nên làm gì | Nhãn · tên lỗi |
 |---|---|---|---|---|---|
@@ -68,13 +67,13 @@ Bốn lớp: ① AI bịa / nguồn sự thật · ② tin nhắn mơ hồ, thi�
 ### Kịch bản #3 — "sao độ lệch chuẩn luôn nhỏ hơn phương sai vậy ạ, em đọc 3.3 thấy ghi vậy mà ko hiểu"
 
 - **AI nói gì (nguyên văn):**
-  > "Phần chắc chắn: độ lệch chuẩn là căn bậc hai của phương sai và có cùng đơn vị với dữ liệu (§3.3). Nhưng câu 'độ lệch chuẩn luôn nhỏ hơn phương sai' trong cùng mục có vẻ không đúng mọi trường hợp: nếu phương sai là 0,25 thì độ lệch chuẩn là 0,5, lớn hơn. Mình không chắc tài liệu muốn nói gì ở câu đó, nên bạn chưa dùng nó khi làm bài. Bạn nên hỏi giảng viên để xác nhận; mình có thể chuyển câu hỏi cho TA kèm mã §3.3 nếu bạn muốn."
-- **Người dùng thấy gì:** hai khối tách rõ: "Phần chắc chắn" (trích §3.3) và "Câu cần xem lại" (đánh dấu cam, trích nguyên văn câu nghi sai, gắn **§3.3**), cùng hai nút **[Chuyển TA kèm §3.3]** và **[Sao chép tin để gửi giảng viên]**.
-- **Làm gì tiếp:** học viên dùng phần chắc chắn để làm bài; gửi giảng viên bản sao chép sẵn (có mã mục, ví dụ 0,25 → 0,5); nếu bấm chuyển TA thì chờ TA trả lời trong giờ 08:00–22:00.
-- **Ai được báo, sau bao lâu:** TA, qua `chuyen_TA` kèm mã §3.3 và ghi "nghi tài liệu sai", sớm nhất trong giờ TA (nếu nhắn sau 22:00 thì 08:00 hôm sau). Giảng viên chỉ biết khi học viên tự gửi hoặc TA chuyển lên; trợ lý **không** nói "giảng viên đã được báo".
+  > "Phần chắc chắn: độ lệch chuẩn là căn bậc hai của phương sai và có cùng đơn vị với dữ liệu (§3.3). Nhưng câu 'độ lệch chuẩn luôn nhỏ hơn phương sai' trong cùng mục có vẻ không đúng mọi trường hợp: nếu phương sai là 0,25 thì độ lệch chuẩn là 0,5, lớn hơn. Mình không chắc tài liệu muốn nói gì ở câu đó, nên bạn chưa dùng nó khi làm bài. Mình đã gửi một báo cáo ẩn danh về câu này cho TA. Bạn nên hỏi giảng viên để xác nhận; mình có thể chuyển câu hỏi cho TA kèm mã §3.3 nếu bạn muốn."
+- **Người dùng thấy gì:** hai khối tách rõ: "Phần chắc chắn" (trích §3.3) và "Câu cần xem lại" (đánh dấu cam, trích nguyên văn câu nghi sai, gắn **§3.3**), cùng hai nút **[Chuyển TA kèm §3.3]** và **[Sao chép tin để gửi giảng viên]**. Bên dưới có dòng "Đã tự gửi báo ẩn danh cho TA" (kết quả của `bao_tai_lieu_nghi_sai`, TA bỏ cờ được).
+- **Làm gì tiếp:** học viên dùng phần chắc chắn để làm bài (báo tài liệu nghi sai đã tự gửi TA, không cần bấm gì); gửi giảng viên bản sao chép sẵn (có mã mục, ví dụ 0,25 → 0,5); nếu bấm chuyển TA thì chờ TA trả lời trong giờ 08:00–22:00.
+- **Ai được báo, sau bao lâu:** TA, **ngay lúc AI phát hiện, không cần học viên bấm**, qua `bao_tai_lieu_nghi_sai` (ẩn danh: mã §3.3, câu nghi sai nguyên văn, ví dụ 0,25 → 0,5) vào hàng chờ TA; TA đọc trong giờ trực (nếu sau 22:00 thì sớm nhất 08:00 hôm sau). Nếu học viên bấm [Chuyển TA kèm §3.3] thì TA nhận thêm câu hỏi của chính học viên qua `chuyen_TA`. Giảng viên chỉ biết khi học viên tự gửi hoặc TA chuyển lên; trợ lý **không** nói "giảng viên đã được báo".
 - **TA thấy gì:** mục trong hàng chờ có nhãn "nghi tài liệu sai", trích nguyên văn câu nghi sai ở §3.3, ví dụ phản chứng 0,25 → 0,5, và câu học viên nhắn.
-- **Nếu học viên không làm gì:** không bấm chuyển và không nhắn giảng viên thì câu sai vẫn nằm nguyên trong tài liệu; học viên này đã được cảnh báo, nhưng học viên sau vẫn gặp lại nếu chưa ai gắn cờ.
-- **Câu này có hứa điều AI không làm được không:** không. "Mình có thể chuyển câu hỏi cho TA" là đề nghị, còn "bạn nên hỏi giảng viên" là chỉ đường; câu không nói giảng viên đã biết.
+- **Nếu học viên không làm gì:** TA vẫn nhận báo ẩn danh từ `bao_tai_lieu_nghi_sai`; học viên này đã được cảnh báo ngay trong câu trả lời. Câu sai vẫn nằm nguyên trong tài liệu cho đến khi người (TA/giảng viên) gắn cờ, nên học viên sau vẫn có thể gặp lại nếu chưa ai gắn cờ.
+- **Câu này có hứa điều AI không làm được không:** không. "Mình có thể chuyển câu hỏi cho TA" là đề nghị, còn "bạn nên hỏi giảng viên" là chỉ đường; câu không nói giảng viên đã biết. Câu "Mình đã gửi một báo cáo ẩn danh cho TA" chỉ hiện khi `bao_tai_lieu_nghi_sai` trả về thành công (luật 2 ở §4).
 - **Quyết định:** chọn **trả lời kèm giới hạn** (tách phần chắc / phần nghi, rồi đề nghị chuyển TA).
   - Loại **trả lời theo tài liệu** ("đúng vì §3.3 viết vậy"): trấn an bằng câu sai, học viên mang sai vào bài.
   - Loại **hỏi lại**: câu hỏi đã rõ, không có gì cần làm rõ thêm.
@@ -90,7 +89,7 @@ Bốn lớp: ① AI bịa / nguồn sự thật · ② tin nhắn mơ hồ, thi�
 | Failure / không căn cứ ① | #3: tài liệu sai | Tách "Phần chắc chắn" / "Câu cần xem lại", không khẳng định tài liệu đúng | Khối cam trích câu nghi sai kèm §3.3, nút chuyển TA và nút sao chép tin cho giảng viên |
 | Correction | Học viên phản bác sau #3: "em thử phương sai 0,25 thì căn ra 0,5 thật, vậy tài liệu sai à?" | Xác nhận phép tính đúng, giữ "có vẻ sai, cần giảng viên xác nhận" (không tuyên bố tài liệu sai hẳn), bỏ giả định cũ rằng câu đó đúng, và cảm ơn đã chỉ ra | Câu trả lời cập nhật, nút [Báo sai chỗ nào?] (G15) để học viên ghi thêm vào tin gửi TA |
 
-Hai kịch bản đắt nhất rơi vào đường 2 (#10) và đường 3 (#3); đường 4 là bước tiếp theo của #3.
+Hai kịch bản đắt nhất rơi vào đường 2 (#10) và đường 3 (#3); đường 4 là bước tiếp theo của #3. (Tên đường theo guide: #10 thuộc lớp ④ ở §2 nhưng trải nghiệm đi đường low-confidence.)
 
 ### Nguyên tắc HAX/PAIR
 
@@ -156,8 +155,8 @@ Ba mức: **tự làm** · **cần người duyệt** · **cấm**. Hai tool b�
 
 Mức nào cũng có giá, và hai thành viên chọn hai đầu:
 - **Vinh: cần TA duyệt mọi gợi ý bài đang mở.** Giá: #10, 22:10 học viên chờ đến 08:00 14/11, sau hạn 23:59; chờ chính là lỗi. Và học viên bình thường hỏi gợi ý đầu tiên cũng phải chờ vô ích.
-- **Hằng: tự làm không giới hạn.** Giá: #10 và #7. Học viên đang gấp bị ép "giải hộ"; AI đưa đáp số thì học viên chép, **không đảo lại được**; và #7 xác nhận "15,25 và 11,5 đúng" là đúng vì may, lần sau đáp số sai cũng bị xác nhận hoặc sửa hộ.
-- **Chốt: tách theo trạng thái bài.** Bài hết hạn có đáp án → tự làm đầy đủ (#6). Bài đang mở → tự làm nhưng chỉ một bước mỗi lượt, không số đáp án, không đúng/sai, kèm bộ lọc số; đưa hay xác nhận đáp số → cấm. Lý do: cả hai phía đều đúng ở một nửa. Chờ người đắt ở #10 (mất hạn) và #6 (từ chối thừa), còn tự làm không giới hạn đắt ở #7 và #10 (chép được); thu hẹp **cái AI được làm** thay vì thêm người duyệt giữ được lợi ích của tự làm (không chờ) và chặn được phần không đảo lại được (đáp số).
+- **Hằng: tự làm có giới hạn** (AI tự gợi ý, nhưng mỗi lượt chỉ một bước và không đưa đáp số, áp cho mọi bài). Giá: (1) giới hạn chỉ nằm ở luật và bộ lọc, không có người chặn, nên gợi ý quá chi tiết vẫn có thể gần như là lời giải, mà học viên chép thì **không đảo lại được** (#10, #7); (2) áp cùng một giới hạn cho cả bài đã hết hạn thì #6 bị từ chối thừa, học viên bình thường bị chặn vô ích.
+- **Chốt: tách theo trạng thái bài.** Bài hết hạn có đáp án → tự làm đầy đủ (#6). Bài đang mở → tự làm nhưng chỉ một bước mỗi lượt, không số đáp án, không đúng/sai, kèm bộ lọc số; đưa hay xác nhận đáp số → cấm. Lý do: cả hai phía đều đúng ở một nửa. Duyệt (Vinh) chặn được gợi ý quá tay nhưng chờ người đắt ở #10 (mất hạn) và #6 (từ chối thừa); tự làm có giới hạn (Hằng) không phải chờ nhưng một giới hạn cho mọi bài thì thừa ở bài đã hết hạn (#6) và có thể lọt ở bài đang mở (#7, #10). Nhóm lấy giới hạn của Hằng cho bài đang mở, tách riêng bài đã hết hạn cho tự làm đầy đủ, và thêm mức cấm cho việc đưa hay xác nhận đáp số. Thu hẹp **cái AI được làm** thay vì thêm người duyệt giữ được lợi ích của tự làm (không chờ) và chặn được phần không đảo lại được (đáp số).
 - **Giá còn lại:** một lượt gợi ý quá chi tiết vẫn có thể gần như là lời giải, bộ lọc số chỉ bắt được số cuối (xem bảng thử bên dưới).
 
 ### Thử mức trên 3 kịch bản
@@ -190,7 +189,7 @@ Mức nào cũng có giá, và hai thành viên chọn hai đầu:
 - **`chuyen_TA` cần học viên bấm.** Trước: "TA sẽ giúp kịp hạn." Sau: "**TA trả lời lúc 08:00 14/11**" (giờ thật, sau hạn 23:59 ở #10); không bấm thì không gửi và trợ lý không nói "đã chuyển". Lời hứa nhỏ hơn nhưng giữ được.
 
 ## §5. Prototype  (chặng 5)
-- **File:** `prototype/index.html` (một file, mở thẳng bằng trình duyệt, không cần server). Tham số URL: `?case=10|3` · `&level=1|2|3` (mức tự chủ của `goi_y_bai_tap`, chỉ có nghĩa ở ca #10) · `&ta=sent` (học viên đã bấm Gửi) · `&flag=1` (TA đã gắn cờ §3.3) · `&later=1` (xem như học viên sau, ca #3).
+- **File:** `prototype/index.html` (một file, mở thẳng bằng trình duyệt, không cần server). Tham số URL: `?case=10|3` · `&level=1|2|3` (mức tự chủ của `goi_y_bai_tap`, chỉ có nghĩa ở ca #10) · `&ta=sent` (học viên đã bấm Gửi) · `&flag=1` (TA đã gắn cờ §3.3) · `&later=1` (xem như học viên sau, ca #3). **Lưu ý ký hiệu:** mức ①②③ của `goi_y_bai_tap` trong prototype (`level=1|2|3`) khác với lớp ①②③④ ở §2.
 - **Công cụ:** viết bằng coding agent, theo khung mẫu giảng viên (một file HTML + JS thuần).
 - **Phần nào mock:** tất cả. Dữ liệu dựng (13/11/2026 22:10, bài 3 hạn 23:59, TA 08:00–22:00, §3.1–§3.3), câu trả lời của AI viết sẵn, hàng chờ TA mô phỏng trong trang, đồng hồ đếm lùi chạy từ 1:49. Không có lời gọi AI thật, không backend, không gửi dữ liệu đi đâu. Bộ lọc số cũng chưa chạy thật: ở mức ② câu trả lời viết sẵn đã không có số.
 - **Bấm được cả ca khó, không cần can thiệp tay:** ca #10 (mức ②): [Bước tiếp theo] → [Chuyển TA · trả lời lúc 08:00 14/11] → thẻ xác nhận → [Gửi cho TA] hoặc [Thôi] → dòng "Đã chuyển" (chỉ hiện sau Gửi) và mục xuất hiện trong hàng chờ TA. Ca #3: chip § mở nguyên văn · [Chuyển TA kèm §3.3] · [Sao chép tin gửi giảng viên] · [Báo sai chỗ nào?] · câu phản bác của học viên · TA [Gắn cờ]/[Bỏ cờ] · [Xem như học viên sau] · FAQ [Duyệt đăng]/[Bỏ].
@@ -243,7 +242,7 @@ Mức nào cũng có giá, và hai thành viên chọn hai đầu:
 **3 tiêu chí Pass/Fail** (người ngoài đọc câu trả lời và màn hình là chấm được):
 - **P1.** Với bài đang mở, câu trả lời không chứa đáp số cuối (15,25 / 11,5) và không chứa "đúng/sai" về đáp số học viên đưa.
 - **P2.** Mọi câu về nội dung có ít nhất một mã § từ `tra_cuu_tai_lieu`; khi § có câu nghi sai hoặc có cờ, câu đó được đánh dấu "cần xem lại" và AI không khẳng định tài liệu đúng.
-- **P3.** Không câu nào nói "đã chuyển / đã báo / đã gia hạn" trừ khi tool tương ứng đã trả về thành công; giờ TA và hạn nộp đúng Dữ liệu B (08:00 14/11, 23:59 13/11).
+- **P3.** Không câu nào nói "đã chuyển / đã báo / đã gia hạn" trừ khi tool tương ứng đã trả về thành công; giờ TA và hạn nộp đúng Dữ liệu B (TA sớm nhất 08:00 14/11 theo giả định ở §2, hạn 23:59 13/11).
 
 **Chấm thiết kế trên hai kịch bản đắt nhất:**
 
@@ -270,8 +269,8 @@ Chưa diễn ra; phần dưới là kế hoạch, ô cuối điền sau demo.
 |---|---|---|
 | 0:00–0:30 | Lát cắt (§1): học viên hỏi bài lúc tối muộn, 3 việc không làm | Vinh |
 | 0:30–2:00 | Mở `?case=10`: bấm ở mức ② ([Bước tiếp theo], [Chuyển TA] → thẻ xác nhận → [Gửi]); đổi sang ① rồi ③ để so | [Hằng: xác nhận] |
-| 2:00–3:00 | `?case=3`: Phần chắc chắn / Câu cần xem lại, [Gắn cờ], [Xem như học viên sau], FAQ chờ duyệt | [thành viên 3: điền] |
-| 3:00–4:00 | Một mức tự chủ và cái giá khi sai: `goi_y_bai_tap` (Vinh chọn duyệt hết, Hằng chọn tự do, nhóm tách theo trạng thái) + #10 chỉ sửa được một phần | [Vinh / Hằng: điền] |
+| 2:00–3:00 | `?case=3`: Phần chắc chắn / Câu cần xem lại, [Gắn cờ], [Xem như học viên sau], FAQ chờ duyệt | Vinh |
+| 3:00–4:00 | Một mức tự chủ và cái giá khi sai: `goi_y_bai_tap` (Vinh chọn duyệt hết, Hằng chọn tự làm có giới hạn, nhóm tách theo trạng thái) + #10 chỉ sửa được một phần | [Vinh / Hằng: điền] |
 
 **Ca lạ đã chuẩn bị** (từ Hard tests)
 
