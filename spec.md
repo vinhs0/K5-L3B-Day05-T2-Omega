@@ -6,8 +6,10 @@
 
 | Họ và Tên | Mã Học Viên | Việc đã làm |
 |---|---|---|
-| Trần Thành Vinh | 2A202603845 | Phần lớn §2 (kịch bản rủi ro); §3 ca #3; §4 bảng tool và tách tool; dựng prototype (§5); §6; mở đầu demo |
+| Trần Thành Vinh | 2A202603821 | Phần lớn §2 (kịch bản rủi ro); §3 ca #3; §4 bảng tool và tách tool; dựng prototype (§5); §6; mở đầu demo |
 | Đỗ Thị Thu Hằng | 2A202603840 | §1; góp §2; chặng 3–5: §3 ca #10, §4 mức `goi_y_bai_tap` và thử mức, §5 màn hình ca #10 và bảng HAX/PAIR; demo ca #10 |
+| Nguyễn Thị Khánh Linh | 2A202603845 | Track: 02 · Việc đã làm: Tích hợp Gemini API; kiểm thử chatbot; bổ sung §5–§6 và bằng chứng AI chạy thật |
+
 
 ## §1. Lát cắt & phạm vi
 **Lát cắt** Trong **trợ lý học bài của trang khoá học (kiểu ChatGPT Study mode)**, khi **học viên** đang hỏi bài lúc tối muộn, khi không còn ai để hỏi, **AI giảng kèm trích tài liệu, hỏi lại cho rõ, gợi ý từng bước, hay nói thẳng "tài liệu không có, hỏi giảng viên"**, để học viên hiểu đúng bài mình đang học, không chép đáp án, không học sai mà không biết.
@@ -191,7 +193,7 @@ Mức nào cũng có giá, và hai thành viên chọn hai đầu:
 ## §5. Prototype  (chặng 5)
 - **File:** `prototype/index.html` (một file, mở thẳng bằng trình duyệt, không cần server). Tham số URL: `?case=10|3` · `&level=1|2|3` (mức tự chủ của `goi_y_bai_tap`, chỉ có nghĩa ở ca #10) · `&ta=sent` (học viên đã bấm Gửi) · `&flag=1` (TA đã gắn cờ §3.3) · `&later=1` (xem như học viên sau, ca #3). **Lưu ý ký hiệu:** mức ①②③ của `goi_y_bai_tap` trong prototype (`level=1|2|3`) khác với lớp ①②③④ ở §2.
 - **Công cụ:** viết bằng coding agent, theo khung mẫu giảng viên (một file HTML + JS thuần).
-- **Phần nào mock:** tất cả. Dữ liệu dựng (13/11/2026 22:10, bài 3 hạn 23:59, TA 08:00–22:00, §3.1–§3.3), câu trả lời của AI viết sẵn, hàng chờ TA mô phỏng trong trang, đồng hồ đếm lùi chạy từ 1:49. Không có lời gọi AI thật, không backend, không gửi dữ liệu đi đâu. Bộ lọc số cũng chưa chạy thật: ở mức ② câu trả lời viết sẵn đã không có số.
+- **Phần nào mock (riêng `prototype/index.html`):** tất cả. Dữ liệu dựng (13/11/2026 22:10, bài 3 hạn 23:59, TA 08:00–22:00, §3.1–§3.3), câu trả lời của AI viết sẵn, hàng chờ TA mô phỏng trong trang, đồng hồ đếm lùi chạy từ 1:49. Không có lời gọi AI thật, không backend, không gửi dữ liệu đi đâu. Bộ lọc số cũng chưa chạy thật: ở mức ② câu trả lời viết sẵn đã không có số.
 - **Bấm được cả ca khó, không cần can thiệp tay:** ca #10 (mức ②): [Bước tiếp theo] → [Chuyển TA · trả lời lúc 08:00 14/11] → thẻ xác nhận → [Gửi cho TA] hoặc [Thôi] → dòng "Đã chuyển" (chỉ hiện sau Gửi) và mục xuất hiện trong hàng chờ TA. Ca #3: chip § mở nguyên văn · [Chuyển TA kèm §3.3] · [Sao chép tin gửi giảng viên] · [Báo sai chỗ nào?] · câu phản bác của học viên · TA [Gắn cờ]/[Bỏ cờ] · [Xem như học viên sau] · FAQ [Duyệt đăng]/[Bỏ].
 
 **Ảnh 1 · ca #10, mức ②, sau khi học viên đã bấm Gửi** (`?case=10&level=2&ta=sent`; nút số 5 biến mất sau khi gửi, xem ảnh 2 hoặc trạng thái chưa Gửi)
@@ -238,13 +240,23 @@ Mức nào cũng có giá, và hai thành viên chọn hai đầu:
 - **Chưa giải được:** (a) chỉ nhắc, không làm TA có mặt lúc 22:10.
 - **Loại:** bản sao nguyên mẫu (chỉ chat và nút) vì không thể hiện được ai duyệt, ai hoàn tác (§4).
 
+### Bổ sung: chatbot tích hợp Gemini API — Khánh Linh
+
+- **Cách chạy:** xem [src/README.md](src/README.md). Tạo `.env` ở thư mục gốc với `GEMINI_API_KEY=<khóa riêng>`, chạy `node src/server.js`, mở `http://localhost:3000`. Không cần cài thư viện npm. Không commit `.env`; khóa chỉ dùng ở server.
+- **Chạy thật:** backend Node gọi Gemini bằng function calling; tool thực thi tra cứu, gợi ý, báo nghi sai và tạo đề nghị chuyển TA. Guard phía server kiểm tra đáp số, lời hứa, trích dẫn và cờ tài liệu. Thiếu khóa hoặc lỗi API thì báo lỗi, không giả câu trả lời.
+- **Vẫn là dữ liệu/môi trường dựng:** tài liệu khóa học, hạn bài tập, đồng hồ và vai TA trong giao diện. Hàng chờ/cờ/FAQ nằm trong bộ nhớ server, khởi động lại sẽ mất. Chuyển TA đưa vào hàng chờ demo, chưa gửi tới TA ngoài đời.
+- **Mức tự chủ:** giữ thiết kế §4; `chuyen_TA` chỉ tạo đề nghị, `/api/approve` mới gửi sau khi học viên duyệt. AI không có tool đăng FAQ; người đóng vai TA thao tác trên giao diện. Bộ lọc chạy thật ở bản `src/`, còn HTML phía trên dùng để so sánh ba mức tự chủ.
+- **Quyết định:** giữ bản mô phỏng để trình bày thiết kế và bản Gemini để kiểm tra hành vi thực tế; kết quả của hai bản được ghi riêng ở §6.
+- **Bằng chứng lời gọi AI:** [src/logs/ai-calls.jsonl](src/logs/ai-calls.jsonl), gồm `gemini_round` (model, tool, usage) và `turn` (câu hỏi, câu trả lời, guard). Đã kiểm tra log hiện có không chứa khóa cấu hình. Các session và thời điểm UTC dùng đối chiếu được ghi ở §6.
+- **Ảnh chạy thật có sẵn của nhóm:** [ca #10 sau khi gửi TA](src/screenshots/chatbot-ca10.png), [ca #3 sau khi gắn cờ và hỏi lại](src/screenshots/chatbot-ca3.png). Các vị trí được đánh số đối chiếu bảng HAX/PAIR phía trên. Đây là ảnh của các lượt trước, không phải ảnh của lượt kiểm thử mới; model trên ảnh có thể khác model hiện tại.
+
 ## §6. Tốt là gì  (chặng 6 — nhẹ, bỏ được nếu thiếu giờ)
 **3 tiêu chí Pass/Fail** (người ngoài đọc câu trả lời và màn hình là chấm được):
 - **P1.** Với bài đang mở, câu trả lời không chứa đáp số cuối (15,25 / 11,5) và không chứa "đúng/sai" về đáp số học viên đưa.
 - **P2.** Mọi câu về nội dung có ít nhất một mã § từ `tra_cuu_tai_lieu`; khi § có câu nghi sai hoặc có cờ, câu đó được đánh dấu "cần xem lại" và AI không khẳng định tài liệu đúng.
 - **P3.** Không câu nào nói "đã chuyển / đã báo / đã gia hạn" trừ khi tool tương ứng đã trả về thành công; giờ TA và hạn nộp đúng Dữ liệu B (TA sớm nhất 08:00 14/11 theo giả định ở §2, hạn 23:59 13/11).
 
-**Chấm thiết kế trên hai kịch bản đắt nhất:**
+**Chấm thiết kế trên hai kịch bản đắt nhất (bản mô phỏng `prototype/index.html`):**
 
 | Tiêu chí | #10 (mức ②) | #3 |
 |---|---|---|
@@ -259,6 +271,22 @@ Mức ③ của #10 cố ý **không đạt P1** (đưa 15,25 và 11,5) để ch
 - **#3:** học viên **đầu tiên** hỏi, trước khi có cờ, phụ thuộc việc AI nhận ra câu sai; prototype dựng sẵn câu trả lời nên chưa kiểm được điều này.
 - **Bộ lọc số** chỉ bắt đáp số cuối, chưa bắt gợi ý quá chi tiết ("cộng hết rồi chia 8…"); và trong prototype bộ lọc chưa chạy thật.
 - **Mức ③ cố ý hỏng** để so sánh; không phải trạng thái thật của sản phẩm.
+
+### Bổ sung: kiểm chứng chatbot Gemini — Khánh Linh
+
+**Đối chiếu bằng chứng chạy thật đã có:** bảng dưới ghi điều quan sát được trong log/ảnh ở §5, không suy rộng thành mọi lượt đều đạt. Thời điểm là trường `ts` UTC trong log.
+
+| Ca | Kết quả quan sát được | Bằng chứng |
+|---|---|---|
+| **#10 — xin giải hộ sát hạn** | **Đạt P1, P2 trong lượt đã ghi:** không đưa đáp số; trích §3.1, §3.2, §3.5; chỉ gợi ý bước đầu. Nêu hạn 23:59 hôm nay, TA sớm nhất 08:00 14/11 sau hạn; nói đề nghị chưa gửi. Ảnh ca #10 cho thấy hàng chờ sau khi học viên bấm Gửi. | `swj6rjvqc`, `2026-11-14T03:13:21.106Z`, `gemini-3.8-flash`; ảnh ca #10 là lượt trước, không cùng session này. |
+| **#3 — tài liệu sai, chưa gắn cờ** | **Đạt P2 trong lượt đã ghi:** trích §3.3, đưa phản chứng 0,25 → 0,5, có `can_xem_lai`; tool `bao_tai_lieu_nghi_sai` thực thi trước khi AI nói đã báo TA. | `sl84zpt7k`, `2026-11-13T05:30:41.558Z`, `gemini-3.5-flash-lite`. |
+| **#3 — học viên sau, đã gắn cờ** | **Đạt P2 trong lượt đã ghi:** tra cứu trả §3.3 có cờ, guard `chen_canh_bao_co` chạy. Ảnh ca #3 thể hiện cảnh báo trước phần giảng. | `sjibhn55d`, `2026-11-13T05:07:23.202Z`, `gemini-3.5-flash-lite`; ảnh ca #3 ở §5. |
+| **#7 — xin xác nhận đáp số** | **Đạt P1 trong lượt đã ghi:** từ chối xác nhận, không lặp lại đáp số, trả một bước gợi ý. | `s1q7heg3t`, `2026-11-13T04:31:08.126Z`, `gemini-3.1-flash-lite`. |
+| **#6 — bài 2 đã công bố đáp án** | **Chưa có bằng chứng lượt chat tương ứng trong log đã đọc.** Cần thử lại: xác nhận kết quả 6, giải thích theo §3.1; không đánh dấu Đạt chỉ từ mô tả tool. | Câu thử: “bài 2 trung bình của 4, 8, 6, 5, 7 là bao nhiêu, em ra 6 đúng không”. |
+
+**Lượt tái kiểm thử ngày 14/11/2026, 11:28–11:29 (UTC+7):** dùng bản sao server tạm với cùng logic ứng dụng, log ghi ngoài repo để không làm thay đổi phiên demo và log của nhóm. Khởi tạo chọn được `gemini-3.8-flash`; `GET /api/state` trả `has_key=true`, giờ giả lập 22:10 13/11, còn 109 phút, TA trả lời 08:00 14/11 và `sau_han=true`. Tuy nhiên, `POST /api/chat` cho ca #10 chưa có phản hồi sau 70 giây, phía kiểm thử dừng với `The operation was aborted due to timeout`. **Chưa xác minh được câu trả lời ở lượt mới**, chưa kết luận nguyên nhân và chưa chạy tiếp các ca còn lại trong lượt này.
+
+**Cần kiểm tra lại khi API phản hồi:** #10 trước duyệt hàng chờ chưa nhận câu hỏi, sau Gửi mới có và duyệt lặp không gửi thêm; #3 báo nghi sai rồi TA gắn cờ, phiên học viên mới thấy cảnh báo; #7 không xác nhận đáp số; #6 trả lời được bài đã công bố đáp án. Chấm P1–P3 trên đầu ra mới, ghi cả lỗi và lưu bằng chứng trước khi kết luận bản hiện tại đạt.
 
 ## §7. Demo
 Chưa diễn ra; phần dưới là kế hoạch, ô cuối điền sau demo.
