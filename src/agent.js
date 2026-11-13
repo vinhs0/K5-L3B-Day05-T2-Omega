@@ -357,7 +357,7 @@ const G = { key: '', queryAuth: false, model: '', candidates: [] };
 
 async function rawFetch(url, opts) {
   const ctl = new AbortController();
-  const t = setTimeout(() => ctl.abort(), 60000);
+  const t = setTimeout(() => ctl.abort(), 45000);
   try { return await fetch(url, Object.assign({ signal: ctl.signal }, opts)); } finally { clearTimeout(t); }
 }
 function authReq(url, body) {
@@ -380,20 +380,21 @@ async function discoverModel(apiKey, override) {
   if (!res.ok) throw new Error(`ListModels HTTP ${res.status}: ${redact(j.error && j.error.message || '', apiKey)}`);
   const ok = (j.models || []).filter((m) => (m.supportedGenerationMethods || []).includes('generateContent'));
   const stable = ok.map((m) => m.name.replace(/^models\//, '')).map((n) => ({ n, m: n.match(/^gemini-(\d+(?:\.\d+)?)-flash$/) })).filter((x) => x.m).sort((a, b) => parseFloat(b.m[1]) - parseFloat(a.m[1])).map((x) => x.n);
-  const preview = ok.map((m) => m.name.replace(/^models\//, '')).filter((n) => /^gemini-[\d.]+-flash-preview/.test(n));
-  G.candidates = stable.concat(preview, ['gemini-flash-latest']);
+  const preview = ok.map((m) => m.name.replace(/^models\//, '')).filter((n) => /^gemini-[\d.]+-flash-preview(-\d+)*$/.test(n));
+  const ver = (n) => parseFloat(n.match(/[\d.]+/)[0]);
+  const lite = ok.map((m) => m.name.replace(/^models\//, '')).filter((n) => /^gemini-[\d.]+-flash-lite(-preview)?$/.test(n)).sort((x, y) => ver(y) - ver(x));
+  G.candidates = [...new Set(stable.concat(preview, lite, ['gemini-flash-latest']))];
   G.model = G.candidates[0];
   if (!G.model) throw new Error('Không có model flash nào hỗ trợ generateContent');
   return { model: G.model, source: 'ListModels', candidates: G.candidates.slice(0, 4) };
 }
 
-async function gemini(body, meta) {
+async function gemini(body) {
   let lastErr;
-  const tried = [];
-  for (let mi = 0; mi < Math.max(1, G.candidates.length); mi++) {
-    const model = G.candidates.length ? (G.candidates.indexOf(G.model) >= 0 ? G.model : G.candidates[mi]) : G.model;
-    tried.push(model);
-    for (let attempt = 0; attempt < 3; attempt++) {
+  const start = Math.max(0, G.candidates.indexOf(G.model));
+  const list = G.candidates.length ? G.candidates.slice(start).slice(0, 9) : [G.model];
+  for (const model of list) {
+    for (let attempt = 0; attempt < 2; attempt++) {
       let res, j;
       try {
         res = await rawFetch(...authReq(`${API}/models/${model}:generateContent`, body));
@@ -402,19 +403,15 @@ async function gemini(body, meta) {
           if (/api key|API_KEY/i.test(JSON.stringify(t))) { G.queryAuth = true; res = await rawFetch(...authReq(`${API}/models/${model}:generateContent`, body)); }
         }
         j = await res.json().catch(() => ({}));
-      } catch (e) { lastErr = new Error('Không gọi được Gemini: ' + redact(e.message, G.key)); await new Promise((r) => setTimeout(r, 1000)); continue; }
+      } catch (e) { lastErr = new Error('Không gọi được Gemini (' + model + '): ' + redact(e.message, G.key) + (e.cause ? ' ' + redact(e.cause.code || e.cause.message || '', G.key) : '')); await new Promise((r) => setTimeout(r, 800)); continue; }
       if (res.ok) { G.model = model; return { json: j, model }; }
-      const msg = redact(j.error && j.error.message || res.statusText, G.key);
-      lastErr = new Error(`Gemini HTTP ${res.status}: ${msg}`);
-      if (res.status === 429 || res.status >= 500) { await new Promise((r) => setTimeout(r, 1500 * (attempt + 1))); continue; }
-      if (res.status === 404 || /model/i.test(msg)) break; // thử model kế
+      const msg = redact((j.error && j.error.message) || res.statusText, G.key);
+      lastErr = new Error(`Gemini HTTP ${res.status} (${model}): ${msg}`);
+      if (res.status === 429 && /per day|quota/i.test(msg)) break; // hết hạn mức ngày: thử model kế
+      if (res.status === 429 || res.status >= 500) { await new Promise((r) => setTimeout(r, 1000)); continue; }
+      if (res.status === 404) break; // thử model kế
       throw lastErr;
     }
-    if (G.candidates.length <= 1) break;
-    // chuyển sang candidate kế
-    const idx = G.candidates.indexOf(model);
-    G.model = G.candidates[idx + 1] || model;
-    if (!G.candidates[idx + 1]) break;
   }
   throw lastErr || new Error('Gemini lỗi không rõ');
 }

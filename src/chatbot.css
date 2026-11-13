@@ -66,3 +66,19 @@ table{border-collapse:collapse;width:100%;font-size:13.5px}td,th{border-bottom:1
 .modal .verb{border-left:4px solid var(--b);background:#faf9f5;padding:8px 12px;margin:8px 0;font-size:14px}
 .foot{font-size:12px;color:var(--mut);padding:0 28px 20px}
 @media(max-width:1100px){main{grid-template-columns:1fr}.row2{grid-template-columns:1fr}}
+.toggle .demo{border-color:var(--g);background:var(--g);color:#fff;font-weight:600}
+.demobox{position:fixed;right:18px;bottom:18px;width:400px;max-height:85vh;overflow:auto;background:#fff;border:2px solid var(--g);border-radius:16px;box-shadow:0 8px 30px rgba(0,0,0,.22);padding:14px 16px;z-index:50;font-size:14px}
+.demobox .case{display:inline-block;font-size:11.5px;font-weight:700;padding:2px 9px;border-radius:999px;background:var(--ab);color:var(--a);margin-right:6px}
+.demobox .step{font-size:12px;color:var(--mut)}
+.demobox h3{margin:4px 0 6px;font-size:16px}
+.demobox .why{background:var(--rb);border-radius:10px;padding:7px 10px;margin:6px 0;font-size:13.5px}
+.demobox .look{background:var(--gb);border-radius:10px;padding:7px 10px;margin:6px 0;font-size:13.5px}
+.demobox .row{display:flex;gap:8px;margin-top:10px}
+.demobox button{font:inherit;font-size:14px;border-radius:999px;padding:7px 16px;cursor:pointer;border:1.5px solid var(--line);background:#fff}
+.demobox button.pri{background:var(--g);border-color:var(--g);color:#fff;font-weight:600}
+.demobox button:disabled{opacity:.5;cursor:wait}
+.hl{outline:3px solid #e0a100;outline-offset:2px}
+
+.faqedit{margin-top:8px;padding-top:6px;border-top:1px dashed var(--line)}
+.faqedit input{width:100%;border:1.5px solid var(--line);border-radius:10px;padding:6px 9px;font:inherit;font-size:13.5px;margin-top:6px}
+.ai.ta{background:var(--gb);border:1.5px solid var(--g)}

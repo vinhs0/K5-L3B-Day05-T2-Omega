@@ -13,7 +13,8 @@
   <button data-clock="2026-11-13T22:10">22:10 13/11</button>
   <button data-clock="2026-11-14T08:00">08:00 14/11</button>
   <span id="modelbadge" style="margin-left:10px"></span>
-  <button class="reset" id="reset">Làm lại từ đầu</button>
+  <button class="reset" id="reset">Reset</button>
+  <button class="demo" id="demostart">▶ Demo luồng #10 → #3</button>
   <span style="margin-left:10px"><label><input type="checkbox" id="ann" checked> Hiện số chú thích HAX/PAIR</label></span>
  </div>
 </header>
@@ -21,7 +22,7 @@
  <section class="phone">
   <div class="bar"><span>Khoá Phân tích dữ liệu · Buổi 3</span><span id="clock">--:--</span></div>
   <div class="trip" id="deadline"><span class="n">7</span>Đang tải hạn nộp…</div>
-  <div class="fixed"><span class="n">4</span><b>Việc mình không làm được:</b> đưa/kiểm đáp số bài đang mở · gia hạn</div>
+  <!-- <div class="fixed"><span class="n">4</span><b>Việc mình không làm được:</b> đưa/kiểm đáp số bài đang mở · gia hạn</div> -->
   <div class="chat" id="chat"></div>
   <div class="sugg" id="sugg"></div>
   <form class="composer" id="form"><input id="msg" placeholder="Hỏi bài…" autocomplete="off" maxlength="1500"><button class="btn pri" id="send" type="submit">Gửi</button></form>
@@ -39,5 +40,7 @@
 </main>
 <div class="foot">LAB5 · AI20K K5 · Ngày 5 · Nhóm Omega · chatbot chạy thật (Gemini). Khoá API chỉ nằm ở server.</div>
 <div class="modal" id="modal"><div class="card"><b id="mtitle"></b><div id="mflag"></div><div class="verb" id="mtext"></div><div class="btns"><button class="btn" id="mclose">Đóng</button></div></div></div>
+<div id="demobox" class="demobox" style="display:none"></div>
 <script src="chatbot.js"></script>
+<script src="demo.js"></script>
 </body></html>

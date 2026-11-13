@@ -50,7 +50,7 @@ function stateView() {
     ta_queue: state.ta_queue,
     flags: state.flags,
     faq: state.faq,
-    model: modelInfo.model || A.getModel() || '',
+    model: A.getModel() || modelInfo.model || '',
     has_key: !!API_KEY,
     model_error: modelInfo.error || undefined,
   };
@@ -69,6 +69,10 @@ async function handleApi(req, res, url) {
     const s = D.SECTIONS.find((x) => x.ma === ma || x.ma === '§' + ma);
     if (!s) return send(res, 404, { error: 'Không có mục này' });
     return send(res, 200, { ma: s.ma, tieu_de: s.tieu_de, noi_dung: s.noi_dung, co_xem_xet: !!state.flags[s.ma] });
+  }
+  if (req.method === 'GET' && p === '/api/replies') { // học viên nhận trả lời của TA trong chatbox của mình
+    const sid = url.searchParams.get('session_id') || '';
+    return send(res, 200, { replies: (state.replies || []).filter((r) => r.session_id === sid) });
   }
   if (req.method !== 'POST') return send(res, 405, { error: 'Method not allowed' });
   const body = await readBody(req);
@@ -119,6 +123,7 @@ async function handleApi(req, res, url) {
       gap: ti.bai3_dang_mo, // gửi trước hạn -> "gấp, trước hạn"
       nhan_gap: ti.bai3_dang_mo ? 'gấp, trước hạn' : undefined,
       an_danh: false,
+      session_id: act.session_id,
       trang_thai: 'cho',
     };
     state.ta_queue.push(item);
@@ -140,6 +145,32 @@ async function handleApi(req, res, url) {
       if (i < 0) return send(res, 404, { error: 'Không có mục này' });
       state.ta_queue.splice(i, 1);
       return send(res, 200, { ok: true, ta_queue: state.ta_queue });
+    }
+    if (t === 'ta_reply') { // TA trả lời câu hỏi đã chuyển; tin nhắn hiện trong chatbox của học viên đã hỏi
+      const i = state.ta_queue.findIndex((x) => x.id === body.id);
+      if (i < 0) return send(res, 404, { error: 'Không có mục này' });
+      const it = state.ta_queue[i];
+      const tra_loi = String(body.tra_loi || '').trim().slice(0, 2000);
+      if (!tra_loi) return send(res, 400, { error: 'Chưa nhập nội dung trả lời' });
+      if (!it.session_id) return send(res, 400, { error: 'Mục này không gắn với phiên học viên nào' });
+      (state.replies = state.replies || []).push({ id: 'r' + (++state.seq), session_id: it.session_id, tra_loi, thoi_gian: state.now, cho_cau_hoi: it.noi_dung });
+      const sess = getSession(it.session_id);
+      sess.history.push({ role: 'user', parts: [{ text: `[Hệ thống] TA đã trả lời học viên: "${tra_loi}"` }] });
+      state.ta_queue.splice(i, 1);
+      return send(res, 200, { ok: true, ta_queue: state.ta_queue });
+    }
+    if (t === 'faq_decide') { // TA chỉnh nội dung rồi đăng FAQ hoặc không đăng, thay cho nút "Xong"
+      const i = state.ta_queue.findIndex((x) => x.id === body.id);
+      if (i < 0) return send(res, 404, { error: 'Không có mục này' });
+      const it = state.ta_queue[i];
+      if (body.publish) {
+        const cau_hoi = String(body.cau_hoi || '').trim().slice(0, 500);
+        const tra_loi = String(body.tra_loi || '').trim().slice(0, 1000);
+        if (!cau_hoi || !tra_loi) return send(res, 400, { error: 'Cần có cả câu hỏi và câu trả lời để đăng FAQ' });
+        state.faq.push({ id: 'f' + (++state.seq), cau_hoi, tra_loi, ma_muc: it.ma_muc || '', thoi_gian: state.now, trang_thai: 'da_dang', nguoi_duyet: 'TA', tu_bao_sai: it.id });
+      }
+      state.ta_queue.splice(i, 1);
+      return send(res, 200, { ok: true, ta_queue: state.ta_queue, faq: state.faq });
     }
     if (t === 'faq_publish' || t === 'faq_discard') {
       const i = state.faq.findIndex((x) => x.id === body.id);
